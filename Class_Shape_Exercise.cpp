@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip> // setprecision()
 #include <math.h> // M_PI
-#include <vector>
 using namespace std;
 
 class Point
@@ -47,13 +46,33 @@ class Point
 
 };
 
-class Shape : public Point
-{
+class Shape
+{protected:
+    Point point;
 public:
     Shape(){};
     virtual double computeCircumference() = 0;
     virtual double computeArea() = 0;
     virtual ~Shape(){};
+
+    //Functions Overrided from Point
+    void printCoordinate()
+    {
+       point.printCoordinate();
+    }
+    double computePointDistance(double x, double y)
+    {
+        return point.computePointDistance(x, y);
+    }
+    //Get & Set Overrided from Point
+     double getX()
+     {
+         return point.getX();
+     }
+     double getY()
+     {
+         return point.getY();
+     }
 };
 
 class Circle: public Shape
@@ -64,18 +83,18 @@ public:
     //Constructor:
     Circle(double radius, double pointX, double pointY){
       this->radius = radius;
-      setX(pointX);
-      setY(pointY);
+      point.setX(pointX);
+      point.setY(pointY);
     };
 
     //Get & Set
     double getX()
     {
-        return Point::getX();
+        return point.getX();
     }
     double getY()
     {
-        return Point::getY();
+        return point.getY();
     }
 
     double computeCircumference()
@@ -95,8 +114,8 @@ public:
     // Constructor:
     Square(double side, double pointX, double pointY){
      this->side = side;
-     setX(pointX);
-     setY(pointY);
+     point.setX(pointX);
+     point.setY(pointY);
     };
 
     double computeCircumference()
@@ -118,8 +137,8 @@ public:
     Rectangle(double width, double height, double pointX, double pointY){
     this->width = width;
     this->height = height;
-    setX(pointX);
-    setY(pointY);
+    point.setX(pointX);
+    point.setY(pointY);
     };
 
     double computeCircumference()
